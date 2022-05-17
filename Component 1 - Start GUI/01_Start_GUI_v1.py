@@ -3,24 +3,6 @@ Create one main frame and one sub frame,
 Use sub frame to organise text and buttons"""
 
 from tkinter import *
-from functools import partial # to prevent unwanted windows
-
-class Dummy:
-    def __init__(self):
-        # Formatting variables
-        background_colour = 'light blue'
-
-        self.main_frame = Frame(width=800, height=600, bg=background_colour,
-                                pady=10)
-        self.main_frame.grid()
-
-        Button(self.main_frame, text='start',
-               command=lambda: self.another_class()).grid(row=0)
-
-    def another_class(self):
-        self.main_frame.grid_forget()
-        self.main_frame.destroy()
-        Start()
 
 class Start:
     def __init__(self):
@@ -43,10 +25,10 @@ class Start:
         Label(self.sub_frame, bg=background_colour, text='Number of lifelines',
               font='Arial 14 bold', padx=10, pady=10).grid(row=0, column=1)
 
-        question_number_1 = Button(self.sub_frame, text='15', font='Arial 16 '
-                                                                'bold')
-        question_number_2 = Button(self.sub_frame, text='20', font='Arial 16 '
-                                                                'bold')
+        question_number_1 = Button(self.sub_frame, text='15',
+                                   font='Arial 16 bold')
+        question_number_2 = Button(self.sub_frame, text='20',
+                                   font='Arial 16 bold')
 
         question_number_1.grid(row=1, column=0, pady=10)
         question_number_2.grid(row=2, column=0, pady=10)
@@ -61,13 +43,9 @@ class Start:
 
         Button(self.main_frame, text='Start', font='Arial 18 bold').grid(row=2)
 
-    def print_txt(self, ):
-        Label(self.main_frame, text='You chose ')
-
-
 # main routine
 if __name__ == "__main__":
     root = Tk()
     root.title("Te Reo Maori")
-    program = Dummy()
+    program = Start()
     root.mainloop()
