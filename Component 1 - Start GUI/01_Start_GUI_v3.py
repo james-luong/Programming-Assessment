@@ -1,9 +1,13 @@
-"""01_Start_GUI_v2
-Add function to print out how many questions and assistance user has chosen
-in row 2
-Change 'Start' button to row 3"""
+"""01_Start_GUI_v3
+Fix text display error - used to be printing either number questions or
+number assistance only
+Print both number questions and number assistance
+"""
 
 from tkinter import *
+
+assist_list = [0]
+quest_list = [0]
 
 class Start:
     def __init__(self):
@@ -11,8 +15,8 @@ class Start:
         #Formatting variables
         self.background_colour = 'light blue'
 
-        self.main_frame = Frame(width=800, height=600,
-                                bg=self.background_colour, pady=10)
+        self.main_frame = Frame(width=800, height=600, bg=self.background_colour,
+                           pady=10)
         self.main_frame.grid()
 
         Label(self.main_frame, text='Te Reo Maori Quiz', font='Arial 16 bold',
@@ -52,17 +56,18 @@ class Start:
         Button(self.main_frame, text='Start', font='Arial 18 bold').grid(row=3)
 
     def print_txt(self, quest, assist):
-        assist_txt = ''
-        quest_txt = ''
-
         if not quest:
-            assist_txt = f'{assist} assistance'
+            assist_list.append(assist)
 
         elif not assist:
-            quest_txt = f'{quest} questions'
+            quest_list.append(quest)
+
+        assist_txt = f'{assist_list[-1]} assistance'
+        quest_txt = f'{quest_list[-1]} questions'
 
         Label(self.main_frame, bg=self.background_colour,
-              text=f'You are choosing {quest_txt} and {assist_txt}').grid(row=2)
+              text=f'You are selecting {quest_txt} and '
+                   f'{assist_txt}').grid(row=2)
 
 # main routine
 if __name__ == "__main__":
