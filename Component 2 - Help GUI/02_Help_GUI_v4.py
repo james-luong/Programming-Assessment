@@ -8,7 +8,7 @@ instructions window is closed
 from tkinter import *
 from functools import partial # to prevent unwanted windows
 
-class Convertor:
+class Main:
     def __init__(self):
         # Formatting variables
         self.background_colour = 'light blue'
@@ -41,7 +41,6 @@ class Convertor:
                                           'wrong answers, but you can use '
                                           'them for a limited time so use '
                                           'them wisely.')
-
 
 class Help:
     def __init__(self, partner):
@@ -86,6 +85,6 @@ class Help:
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Temperature Convertor")
-    something = Convertor()
+    root.title("Te Reo Maori")
+    program = Main()
     root.mainloop()
