@@ -59,21 +59,21 @@ class Quiz:
 
         # answer buttons
         # using config to make fixed button size
+        # add command to buttons
         self.answer_1 = Button(self.answer_frame,
                                text=quest_ans_list[0][1][0],
                                command=lambda: self.check_ans(quest_ans_list[0]
                                                               [1][0]),
                                font='arial 10 bold', padx=60, pady=10)
-        self.answer_1.grid(row=0, column=0)
+        self.answer_1.grid(row=0, column=0, padx=5, pady=5)
         self.answer_1.config(width=7)
-        print(self.answer_1['text'])
 
         self.answer_2 = Button(self.answer_frame,
                                text=quest_ans_list[0][1][1],
                                command=lambda: self.check_ans(quest_ans_list[0]
                                                               [1][1]),
                                font='arial 10 bold', padx=60, pady=10)
-        self.answer_2.grid(row=0, column=1)
+        self.answer_2.grid(row=0, column=1, padx=5, pady=5)
         self.answer_2.config(width=7)
 
         self.answer_3 = Button(self.answer_frame,
@@ -93,9 +93,14 @@ class Quiz:
         self.answer_4.config(width=7)
 
     def next_quest(self):
+        # make quest_num, quest_ans_list global
         global quest_num, quest_ans_list
+
+        # increase number of questions whenever user click next question button
         quest_num += 1
 
+        # when the number of questions reach the maximum (chosen question
+        # number), disable all buttons
         if quest_num == chosen_num_quest:
             self.answer_1.config(state=DISABLED)
             self.answer_2.config(state=DISABLED)
@@ -104,18 +109,27 @@ class Quiz:
             self.next_quest_button.config(state=DISABLED)
 
         else:
+            # delete the first question & answers list
             quest_ans_list.pop(0)
-
-            quest_ans_list = [i for i in quest_ans_list]
-            shuffle(quest_ans_list)
             print(quest_ans_list)
 
+            # shuffle all questions so that they will not be shown in the
+            # same order every time
+            quest_ans_list = [i for i in quest_ans_list]
+            shuffle(quest_ans_list)
+
+            # also shuffle answers in a question so that they will not be in
+            # the same position every time
             quest_ans_list[0][1] = [i for i in quest_ans_list[0][1]]
             shuffle(quest_ans_list[0][1])
 
+            # display number of questions users are up to
             self.no_quest.config(text=f'Question: {quest_num + 1}/'
                                       f'{chosen_num_quest}')
 
+            # change question and answers
+            # change buttons background to white as correct answer has been
+            # changed green before
             self.quest_label.config(text=quest_ans_list[0][0])
             self.answer_1.config(state=NORMAL, bg='white',
                                  text=quest_ans_list[0][1][0])
@@ -127,7 +141,8 @@ class Quiz:
                                  text=quest_ans_list[0][1][3])
 
     def check_ans(self, click_btn):
-        print(click_btn)
+        # turn correct answer buttons to green when user click one of the
+        # answer buttons
         if self.answer_1['text'] == quest_ans_dict[quest_ans_list[0][0]]:
             self.answer_1.config(bg='green')
 
@@ -140,6 +155,7 @@ class Quiz:
         elif self.answer_4['text'] == quest_ans_dict[quest_ans_list[0][0]]:
             self.answer_4.config(bg='green')
 
+        # if answer user clicked is wrong, make background colour red
         if click_btn == self.answer_1['text']:
             if self.answer_1['text'] != quest_ans_dict[quest_ans_list[0][0]]:
                 self.answer_1.config(bg='red')

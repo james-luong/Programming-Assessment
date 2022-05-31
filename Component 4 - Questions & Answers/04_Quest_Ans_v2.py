@@ -1,3 +1,10 @@
+"""
+04_Quest_Ans_v2
+Show number of questions, increase every time user click next question button
+When number of questions reach the maximum questions, disable all buttons after
+user click next question button one more time
+"""
+
 from tkinter import *
 from random import shuffle
 import csv
@@ -57,6 +64,7 @@ class Quiz:
 
         # answer buttons
         # using config to make fixed button size
+        # add command to buttons
         self.answer_1 = Button(self.answer_frame,
                                text=quest_ans_list[quest_num][1][0],
                                font='arial 10 bold', padx=60, pady=10)
@@ -82,9 +90,14 @@ class Quiz:
         self.answer_4.config(width=7)
 
     def next_quest(self):
+        # make quest_num, quest_ans_list global
         global quest_num, quest_ans_list
+
+        # increase number of questions whenever user click next question button
         quest_num += 1
 
+        # when the number of questions reach the maximum (chosen question
+        # number), disable all buttons
         if quest_num == chosen_num_quest:
             self.answer_1.config(state=DISABLED)
             self.answer_2.config(state=DISABLED)
@@ -93,18 +106,25 @@ class Quiz:
             self.next_quest_button.config(state=DISABLED)
 
         else:
+            # delete the first question & answers list
             quest_ans_list.pop(0)
             print(quest_ans_list)
 
+            # shuffle all questions so that they will not be shown in the
+            # same order every time
             quest_ans_list = [i for i in quest_ans_list]
             shuffle(quest_ans_list)
 
+            # also shuffle answers in a question so that they will not be in
+            # the same position every time
             quest_ans_list[0][1] = [i for i in quest_ans_list[0][1]]
             shuffle(quest_ans_list[0][1])
 
+            # display number of questions users are up to
             self.no_quest.config(text=f'Question: {quest_num + 1}/'
                                       f'{chosen_num_quest}')
 
+            # change question and answers
             self.quest_label.config(text=quest_ans_list[0][0])
             self.answer_1.config(state=NORMAL,
                                  text=quest_ans_list[0][1][0])

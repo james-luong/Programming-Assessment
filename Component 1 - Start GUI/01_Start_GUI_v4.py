@@ -39,7 +39,7 @@ class Instruction:
                command=lambda: self.another_class())
         self.start_button.grid(padx=20, pady=10)
 
-        # function to delete Instruction UI and get to Start UI
+    # delete Instruction UI and get to Start UI
     def another_class(self):
         self.main_frame.grid_forget()
         self.main_frame.destroy()

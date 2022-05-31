@@ -1,11 +1,15 @@
 """
-06_Summary_v1
+06_Summary_v2
 Create basic frame with two buttons, replay and end game
 Replay button bring back to Instructions
 End game button shows farewell words
 """
 
 from tkinter import *
+import random
+
+score = random.randint(0, 20)
+chosen_quest_num = int(input('Chosen number of questions: '))
 
 # instructions
 class Instruction:
@@ -40,8 +44,9 @@ class Summary:
         self.main_label.grid(row=0, padx=10, pady=10)
 
         # show user's scores
-        self.scores = Label(self.main_frame, text='You got ?/15',
-                            font='arial 14', bg=self.background)
+        self.scores = Label(self.main_frame, font='arial 14',
+                            bg=self.background,
+                            text=f'You got {score}/{chosen_quest_num}')
         self.scores.grid(row=1, pady=10, padx=10)
 
         # sub frame for buttons
