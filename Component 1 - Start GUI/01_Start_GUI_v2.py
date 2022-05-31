@@ -73,7 +73,8 @@ class Start:
 
         # display number of questions and assistance
         Label(self.main_frame, bg=self.background_colour,
-              text=f'You are choosing {quest_txt} and {assist_txt}').grid(row=2)
+              text=f'You are choosing {quest_txt} and {assist_txt}').\
+                                                                    grid(row=2)
 
 # main routine
 if __name__ == "__main__":

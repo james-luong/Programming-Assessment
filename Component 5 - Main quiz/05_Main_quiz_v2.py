@@ -1,10 +1,19 @@
+"""
+05_Main_quiz_v2
+Explain more detail in Instruction GUI
+Increase number of assistance from 1, 2, 3 to 3, 4, 5
+Add Help GUI (02_Help_GUI_v4)
+"""
+
 from tkinter import *
 import random
 from random import shuffle
 import csv
 from functools import partial
 
+# list to store all questions + answers
 quest_ans_list = []
+# dictionary to store questions + correct answers
 quest_ans_dict = {}
 
 # questions & answers from tepapa.govt.nz and testyourlanguage.com
@@ -20,6 +29,7 @@ with open('maori quiz.csv', 'r') as file:
         # list are correct answers by default)
         quest_ans_dict[row[0].capitalize()] = row[-1]
 
+# add total correct answers
 total_correct_ans = 0
 quest_num = 0
 
@@ -244,7 +254,7 @@ class Quiz:
                                command=lambda: self.check_ans(quest_ans_list[0]
                                                               [1][0]),
                                font='arial 10 bold', padx=60, pady=10)
-        self.answer_1.grid(row=0, column=0)
+        self.answer_1.grid(row=0, column=0, padx=5, pady=5)
         self.answer_1.config(width=8)
 
         self.answer_2 = Button(self.answers_frame,
@@ -252,7 +262,7 @@ class Quiz:
                                command=lambda: self.check_ans(quest_ans_list[0]
                                                               [1][1]),
                                font='arial 10 bold', padx=60, pady=10)
-        self.answer_2.grid(row=0, column=1)
+        self.answer_2.grid(row=0, column=1, padx=5, pady=5)
         self.answer_2.config(width=8)
 
         self.answer_3 = Button(self.answers_frame,
@@ -307,12 +317,18 @@ class Quiz:
             self.answer_4.config(state=DISABLED)
 
     def next_quest(self):
+        # make quest_num, quest_ans_list global to apply changes
         global quest_num, quest_ans_list
+
+        # increase number of questions whenever user click next question button
         quest_num += 1
 
+        # enable assist button if there's still number of assist
         if self.num_assist > 0:
             self.assist_button.config(state=NORMAL)
 
+        # when the number of questions reach the maximum (chosen question
+        # number), disable all buttons
         if quest_num == quest_assist[0]:
             self.answer_1.config(state=DISABLED)
             self.answer_2.config(state=DISABLED)
@@ -322,17 +338,26 @@ class Quiz:
             self.next_quest_button.config(state=DISABLED)
 
         else:
+            # delete the first question & answers list
             quest_ans_list.pop(0)
 
+            # shuffle all questions so that they will not be shown in the
+            # same order every time
             quest_ans_list = [i for i in quest_ans_list]
             shuffle(quest_ans_list)
 
+            # also shuffle answers in a question so that they will not be in
+            # the same position every time
             quest_ans_list[0][1] = [i for i in quest_ans_list[0][1]]
             shuffle(quest_ans_list[0][1])
 
+            # display number of questions users are up to
             self.quest_no.config(text=f'Question: {quest_num + 1}/'
                                       f'{quest_assist[0]}')
 
+            # change question and answers
+            # change buttons background to white as correct answer has been
+            # changed green before
             self.quest_label.config(text=quest_ans_list[0][0])
             self.answer_1.config(state=NORMAL, bg='white',
                                  text=quest_ans_list[0][1][0])
@@ -344,13 +369,19 @@ class Quiz:
                                  text=quest_ans_list[0][1][3])
 
     def check_ans(self, click_btn):
+        # make total_correct_ans global to adjust changes
         global total_correct_ans
+
+        # disable answer and assist buttons when user click one answer
+        # to prevent user clicking correct answers after getting a wrong answer
         self.answer_1.config(state=DISABLED)
         self.answer_2.config(state=DISABLED)
         self.answer_3.config(state=DISABLED)
         self.answer_4.config(state=DISABLED)
         self.assist_button.config(state=DISABLED)
 
+        # turn correct answer buttons to green when user click one of the
+        # answer buttons
         if self.answer_1['text'] == quest_ans_dict[quest_ans_list[0][0]]:
             self.answer_1.config(bg='#2BFF34')
 
@@ -363,6 +394,7 @@ class Quiz:
         elif self.answer_4['text'] == quest_ans_dict[quest_ans_list[0][0]]:
             self.answer_4.config(bg='#2BFF34')
 
+        # if answer user clicked is wrong, make background colour red
         if click_btn == self.answer_1['text']:
             if self.answer_1['text'] != quest_ans_dict[quest_ans_list[0][0]]:
                 self.answer_1.config(bg='red')
@@ -380,11 +412,15 @@ class Quiz:
                 self.answer_4.config(bg='red')
 
         if click_btn == quest_ans_dict[quest_ans_list[0][0]]:
+            # add 1 score for each correct answer user get
             total_correct_ans += 1
+
+            # display current score
             self.correct_ans_no.config(text=f'Correct answers: '
                                             f'{total_correct_ans}'
                                             f'/{quest_assist[0]}')
 
+    # activate help GUI
     def help_activate(self):
         get_help = Help(self)
         get_help.help_text.configure(text='Te Reo Maori Quiz is made to test '

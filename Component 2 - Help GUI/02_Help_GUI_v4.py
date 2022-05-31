@@ -61,7 +61,7 @@ class Help:
         self.help_frame.grid()
 
         # set up help heading (row 1)
-        self.help_heading = Label(self.help_frame, text='Export/Instructions',
+        self.help_heading = Label(self.help_frame, text='Help/Instructions',
                                   font='arial 10 bold', bg=background)
         self.help_heading.grid(row=0)
 
