@@ -68,13 +68,13 @@ class Quiz:
         self.answer_1 = Button(self.answer_frame,
                                text=quest_ans_list[quest_num][1][0],
                                font='arial 10 bold', padx=60, pady=10)
-        self.answer_1.grid(row=0, column=0)
+        self.answer_1.grid(row=0, column=0, padx=5, pady=5)
         self.answer_1.config(width=7)
 
         self.answer_2 = Button(self.answer_frame,
                                text=quest_ans_list[quest_num][1][1],
                                font='arial 10 bold', padx=60, pady=10)
-        self.answer_2.grid(row=0, column=1)
+        self.answer_2.grid(row=0, column=1, padx=5, pady=5)
         self.answer_2.config(width=7)
 
         self.answer_3 = Button(self.answer_frame,

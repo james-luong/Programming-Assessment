@@ -70,7 +70,8 @@ class Main:
         self.num_assist -= 1
 
         # update new number of assist left for user
-        self.assist_button.configure(text=f'Assistance: {self.num_assist}')
+        self.assist_button.configure(text=f'Assistance (50/50): '
+                                          f'{self.num_assist}')
 
         # disable assist button for now
         self.assist_button.config(state=DISABLED)

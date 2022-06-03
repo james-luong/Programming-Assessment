@@ -18,17 +18,16 @@ quest_ans_dict = {}
 with open('maori quiz.csv', 'r') as file:
     reader = csv.reader(file)
     for row in reader:
+        print(row)
         # append items to quest_ans_list as
         # ['question', [ans1, ans2, ans3, ans4]] format
-        # left last item as it is correct answer and add it in dictionary
+        # left last item as it is correct answer
         quest_ans_list.append([row[0], row[1:-1]])
 
         # add questions & correct answers to dict (*note: last items in each
         # list are correct answers by default)
         quest_ans_dict[row[0]] = row[-1]
 
-print(quest_ans_list)
-print(quest_ans_dict)
 
 chosen_num_quest = 20
 quest_num = 0
@@ -72,13 +71,13 @@ class Quiz:
         self.answer_1 = Button(self.answer_frame,
                                text=quest_ans_list[quest_num][1][0],
                                font='arial 10 bold', padx=60, pady=10)
-        self.answer_1.grid(row=0, column=0)
+        self.answer_1.grid(row=0, column=0, padx=5, pady=5)
         self.answer_1.config(width=7)
 
         self.answer_2 = Button(self.answer_frame,
                                text=quest_ans_list[quest_num][1][1],
                                font='arial 10 bold', padx=60, pady=10)
-        self.answer_2.grid(row=0, column=1)
+        self.answer_2.grid(row=0, column=1, padx=5, pady=5)
         self.answer_2.config(width=7)
 
         self.answer_3 = Button(self.answer_frame,

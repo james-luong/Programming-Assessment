@@ -419,12 +419,12 @@ class Quiz:
         get_help.help_text.configure(text='Te Reo Maori Quiz is made to test '
                                           'your vocabulary and understanding '
                                           'of Maori language. There are '
-                                          f'{quest_num} questions and you can '
-                                          'use Assistance to help when you '
-                                          'are stuck. Assistance helps you '
-                                          'eliminate two wrong answers and it '
-                                          'can only be used once each '
-                                          'question.')
+                                          f'{quest_assist[0]} questions and '
+                                          'you can use Assistance to help '
+                                          'when you are stuck. Assistance '
+                                          'helps you eliminate two wrong '
+                                          'answers and it can only be used '
+                                          'once each question.')
 
 class Help:
     def __init__(self, partner):
