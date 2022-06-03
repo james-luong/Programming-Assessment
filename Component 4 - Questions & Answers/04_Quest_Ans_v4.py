@@ -1,3 +1,11 @@
+"""
+04_Quest_Ans_v4
+Make buttons that user click red if it's wrong, and make correct answer green
+at the same time
+Disable all answer buttons once an answer button is clicked, and re-activate it
+after next question button is clicked.
+"""
+
 from tkinter import *
 from random import shuffle
 import csv
@@ -17,8 +25,6 @@ with open('maori quiz.csv', 'r') as file:
         # add questions & correct answers to dict (*note: last items in each
         # list are correct answers by default)
         quest_ans_dict[row[0].capitalize()] = row[-1]
-
-print(quest_ans_dict)
 
 chosen_num_quest = 20
 quest_num = 0
@@ -109,9 +115,9 @@ class Quiz:
             self.next_quest_button.config(state=DISABLED)
 
         else:
-            # delete the first question & answers list
+            # delete the first question & answers list so that it does not
+            # repeat
             quest_ans_list.pop(0)
-            print(quest_ans_list)
 
             # shuffle all questions so that they will not be shown in the
             # same order every time
@@ -122,6 +128,7 @@ class Quiz:
             # the same position every time
             quest_ans_list[0][1] = [i for i in quest_ans_list[0][1]]
             shuffle(quest_ans_list[0][1])
+            print(quest_ans_list)
 
             # display number of questions users are up to
             self.no_quest.config(text=f'Question: {quest_num + 1}/'
@@ -141,6 +148,13 @@ class Quiz:
                                  text=quest_ans_list[0][1][3])
 
     def check_ans(self, click_btn):
+        # disable answer and assist buttons when user click one answer
+        # to prevent user clicking correct answers after getting a wrong answer
+        self.answer_1.config(state=DISABLED)
+        self.answer_2.config(state=DISABLED)
+        self.answer_3.config(state=DISABLED)
+        self.answer_4.config(state=DISABLED)
+
         # turn correct answer buttons to green when user click one of the
         # answer buttons
         if self.answer_1['text'] == quest_ans_dict[quest_ans_list[0][0]]:
