@@ -148,13 +148,6 @@ class Quiz:
                                  text=quest_ans_list[0][1][3])
 
     def check_ans(self, click_btn):
-        # disable answer and assist buttons when user click one answer
-        # to prevent user clicking correct answers after getting a wrong answer
-        self.answer_1.config(state=DISABLED)
-        self.answer_2.config(state=DISABLED)
-        self.answer_3.config(state=DISABLED)
-        self.answer_4.config(state=DISABLED)
-
         # turn correct answer buttons to green when user click one of the
         # answer buttons
         if self.answer_1['text'] == quest_ans_dict[quest_ans_list[0][0]]:

@@ -6,9 +6,8 @@ End game button shows farewell words
 """
 
 from tkinter import *
-import random
 
-score = random.randint(0, 20)
+score = int(input('Number of correct answers: '))
 chosen_quest_num = int(input('Chosen number of questions: '))
 
 # instructions

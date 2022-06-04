@@ -79,28 +79,21 @@ class Main:
         self.assist_button.config(state=DISABLED)
 
         # list of answers can be removed (i.e. not correct answers)
-        ans_to_del = []
-
-        for answer in range(4):
-            # append to ans_to_del list if answer is not correct
-            if quest_ans_list[1][answer] != quest_ans_dict['Questions']:
-                ans_to_del.append(quest_ans_list[1][answer])
-
-        # delete one random wrong answer in the list so that there's only 2
-        # items left in the list which will be eliminated
-        ans_to_del.remove(random.choice(ans_to_del))
+        to_delete = set(random.sample(range(len(quest_ans_list[1])), 2))
+        remain_list = [x for i, x in enumerate(quest_ans_list[1]) if not i in \
+                                                                 to_delete]
 
         # disable answer that is not correct
-        if self.answer_1['text'] in ans_to_del:
+        if self.answer_1['text'] not in remain_list:
             self.answer_1.config(state=DISABLED)
 
-        if self.answer_2['text'] in ans_to_del:
+        if self.answer_2['text'] not in remain_list:
             self.answer_2.config(state=DISABLED)
 
-        if self.answer_3['text'] in ans_to_del:
+        if self.answer_3['text'] not in remain_list:
             self.answer_3.config(state=DISABLED)
 
-        if self.answer_4['text'] in ans_to_del:
+        if self.answer_4['text'] not in remain_list:
             self.answer_4.config(state=DISABLED)
 
     def next_quest(self):

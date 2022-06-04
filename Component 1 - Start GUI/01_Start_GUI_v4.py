@@ -31,8 +31,9 @@ class Instruction:
         # brief instruction
         Label(self.main_frame, bg=self.background_colour,
               text='Before starting, you can choose either 15 or 20 questions.'
-                   '\nThere is a 50/50 assistance and you can choose to have 1'
-                   ' or 2 or 3 of them', font='Arial 12').grid(padx=20,pady=10)
+                   '\nAssistance 50/50 help you eliminate 2 wrong answer and '
+                   'you can choose to have 1, 2 or 3 of them',
+              font='Arial 12').grid(padx=20,pady=10)
 
         # start button to get to questions&assist frame
         self.start_button = Button(self.main_frame, text='Start', width=10,

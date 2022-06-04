@@ -55,9 +55,8 @@ class Instruction:
         # brief instruction
         Label(self.main_frame, bg=self.background_colour,
               text='Before you start, you can choose either 15 or 20 '
-                   'questions. There is a 50/50 assistance which can '
-                   'eliminate two wrong answers and you can choose to have 1, '
-                   '2 or 3 of them',
+                   'questions. Assistance 50/50 help you eliminate 2 wrong '
+                   'answers and you can choose to have 1, 2 or 3 of them',
               font='Arial 12', wrap=400).grid(row=1, padx=20, pady=10)
 
         # start button to get to questions&assist frame
