@@ -4,7 +4,7 @@ Copy of v1 but added some changes after feedbacks
 In Class Start, question and assist buttons turn to green if clicked to make it
 easier for users to see what they are choosing
 In Class Quiz, two wrong answer buttons' background turn to red after assist
-button clicked to make it clearer for user
+button clicked to make it clearer for users
 """
 
 from tkinter import *
