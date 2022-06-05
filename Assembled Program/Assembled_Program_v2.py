@@ -101,28 +101,28 @@ class Start:
 
         # question buttons
         # add function to store number of questions using lambda
-        question_number_1 = Button(self.sub_frame, text='15',
+        self.question_number_1 = Button(self.sub_frame, text='15',
                                    font='Arial 16 bold', command=lambda:
             self.print_txt(15, False))
-        question_number_2 = Button(self.sub_frame, text='20',
+        self.question_number_2 = Button(self.sub_frame, text='20',
                                    font='Arial 16 bold', command=lambda:
             self.print_txt(20, False))
 
-        question_number_1.grid(row=1, column=0, pady=10)
-        question_number_2.grid(row=2, column=0, pady=10)
+        self.question_number_1.grid(row=1, column=0, pady=10)
+        self.question_number_2.grid(row=2, column=0, pady=10)
 
         # assistance buttons
         # add function to store number of assistance using lambda
-        assist_1 = Button(self.sub_frame, text='3', font='Arial 16 bold',
+        self.assist_1 = Button(self.sub_frame, text='3', font='Arial 16 bold',
                           command=lambda: self.print_txt(False, 3))
-        assist_2 = Button(self.sub_frame, text='4', font='Arial 16 bold',
+        self.assist_2 = Button(self.sub_frame, text='4', font='Arial 16 bold',
                           command=lambda: self.print_txt(False, 4))
-        assist_3 = Button(self.sub_frame, text='5', font='Arial 16 bold',
+        self.assist_3 = Button(self.sub_frame, text='5', font='Arial 16 bold',
                           command=lambda: self.print_txt(False, 5))
 
-        assist_1.grid(row=1, column=1, pady=10)
-        assist_2.grid(row=2, column=1, pady=10)
-        assist_3.grid(row=3, column=1, pady=10)
+        self.assist_1.grid(row=1, column=1, pady=10)
+        self.assist_2.grid(row=2, column=1, pady=10)
+        self.assist_3.grid(row=3, column=1, pady=10)
 
         # add confirm function to button
         # after user press 'Start', store the last value of questions & assist
@@ -143,6 +143,30 @@ class Start:
     # fixed error to print both questions and assistance (can only print
     # either before)
     def print_txt(self, quest, assist):
+
+        if str(quest) == self.question_number_1['text']:
+            self.question_number_1.config(bg='#2BFF34')
+            self.question_number_2.config(bg='white')
+
+        elif str(quest) == self.question_number_2['text']:
+            self.question_number_2.config(bg='#2BFF34')
+            self.question_number_1.config(bg='white')
+
+        if str(assist) == self.assist_1['text']:
+            self.assist_1.config(bg='#2BFF34')
+            self.assist_2.config(bg='white')
+            self.assist_3.config(bg='white')
+
+        elif str(assist) == self.assist_2['text']:
+            self.assist_1.config(bg='white')
+            self.assist_2.config(bg='#2BFF34')
+            self.assist_3.config(bg='white')
+
+        elif str(assist) == self.assist_3['text']:
+            self.assist_1.config(bg='white')
+            self.assist_2.config(bg='white')
+            self.assist_3.config(bg='#2BFF34')
+
         if not quest:  # if quest is false, the value is assist
             assist_list.append(assist)  # append value to assist list
 
@@ -299,18 +323,19 @@ class Quiz:
         # delete random wrong answers
         ans_to_del.remove(random.choice(ans_to_del))
 
-        # disable answer that is not correct
+        # disable and change background to red of answer buttons that are not
+        # correct
         if self.answer_1['text'] in ans_to_del:
-            self.answer_1.config(state=DISABLED)
+            self.answer_1.config(bg='red', state=DISABLED)
 
         if self.answer_2['text'] in ans_to_del:
-            self.answer_2.config(state=DISABLED)
+            self.answer_2.config(bg='red', state=DISABLED)
 
         if self.answer_3['text'] in ans_to_del:
-            self.answer_3.config(state=DISABLED)
+            self.answer_3.config(bg='red', state=DISABLED)
 
         if self.answer_4['text'] in ans_to_del:
-            self.answer_4.config(state=DISABLED)
+            self.answer_4.config(bg='red', state=DISABLED)
 
     def next_quest(self):
         # make quest_num, quest_ans_list global to apply changes
